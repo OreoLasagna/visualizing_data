@@ -13,14 +13,22 @@ header_row = next(reader)
 for index, column_header in enumerate(header_row):
     print(index, column_header)
 
+    if column_header == 'TMAX':
+        TMAX = index
+        print(TMAX)
+
+    if column_header == 'TMIN':
+        TMIN = index
+        print(TMIN)
+
 dates, highs, lows = [], [], []
 
 for row in reader: 
     current_date = datetime.strptime(row[2], '%Y-%m-%d')
     
     try:
-        high = int(row[3])
-        low = int(row[4])
+        high = int(row[TMAX])
+        low = int(row[TMIN])
     except ValueError:
         print(f"Missing data for {current_date}")
     else:
